@@ -1,0 +1,5 @@
+%h1 Welcome#index
+%p Find me in app/views/welcome/index.html.haml
+%a= current_user
+%div= link_to 'create', visits_path, :method => :post
+%div= link_to 'update', '/visits/10/close'

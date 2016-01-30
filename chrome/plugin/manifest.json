@@ -1,0 +1,18 @@
+{
+  "name": "超级历史",
+  "version": "0.1",
+  "manifest_version": 2,
+  "description": "超级浏览器历史插件,记录你的上网点滴",
+  "browser_action": {
+    "default_icon": "images/icon.png",
+    "default_title": "超级历史"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*/*"],
+      "js": ["js/lib/jquery.js", "js/utils.js", "js/main.js"]
+    }
+  ]
+}
+
+
