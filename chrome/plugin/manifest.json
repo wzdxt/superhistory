@@ -7,12 +7,18 @@
     "default_icon": "images/icon.png",
     "default_title": "超级历史"
   },
+  "permissions": [
+    "http://*/*"
+  ],
   "content_scripts": [
     {
       "matches": ["*://*/*"],
       "js": ["js/lib/jquery.js", "js/utils.js", "js/main.js"]
     }
-  ]
+  ],
+  "background": {
+    "scripts": ["js/background.js"]
+  }
 }
 
 
