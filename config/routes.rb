@@ -3,8 +3,8 @@ Rails.application.routes.draw do
   root 'welcome#index'
   get 'welcome/index'
 
-  get 'visits/get' => 'visits#create'
-  get 'visits/:id/close' => 'visits#close'
+  post 'visits' => 'visits#create'
+  patch 'visits/:id/close' => 'visits#close'
 
   # root 'welcome#index'
   # get 'welcome#index'

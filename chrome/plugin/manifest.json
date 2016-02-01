@@ -15,9 +15,9 @@
       "matches": ["*://*/*"],
       "js": ["js/lib/jquery.js", "js/utils.js", "js/main.js"]
     }
-  ],
-  "background": {
-    "scripts": ["js/background.js"]
+  ]
+  ,"background": {
+    "scripts": ["js/lib/jquery.js", "js/lib/jquery_ujs.js", "js/background.js"]
   }
 }
 

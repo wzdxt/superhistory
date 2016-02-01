@@ -4,28 +4,23 @@
             method: method,
             action: 'xhttp',
             url: url,
-            data: data
+            data: $.param(data)
         }, function (responseText) {
-            log(responseText);
-            /*Callback function to deal with the response*/
+            callback(responseText);
         });
     };
     var host = "http://localhost:3000";
+    var referer = location.protocol + "//" + location.host + location.pathname;
     var visit_id;
 
-    //$.getJSON(host + "/visits/get", {}, function (data) {
-    //    visit_id = data;
-    //});
-    ajaxRequest("GET", host + "/visits/get", {}, function (data) {
+    ajaxRequest("post", host + "/visits", {referer:referer}, function (data) {
         visit_id = data;
     });
 
     window.onbeforeunload = (function () {
         if (visit_id !== undefined && !isNaN(visit_id)) {
-            //$.getJSON(host + "/visits/" + visit_id + "/close", {});
-            ajaxRequest("GET", host + "/visits/" + visit_id + "/close", {});
+            ajaxRequest("post", host + "/visits/" + visit_id + "/close", {_method:"patch", referer: referer});
         }
     });
-
 })();
 
