@@ -36,10 +36,10 @@ gem 'haml-rails'
 group :production do
   # Use postgresql as the database for Active Record
   gem 'mysql2'
+  gem 'viaduct_rails_helpers'
 end
 group :development, :test do
   gem 'sqlite3'
-  gem 'thin'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   # gem 'byebug'
 
