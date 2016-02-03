@@ -1,6 +1,6 @@
 %h1 Welcome#index
 %p Find me in app/views/welcome/index.html.haml
-%a= current_user
+%div= link_to 'sign out', destroy_user_session_path, :method => :delete
 %div= link_to 'create', '/visits/get'
 %div= link_to 'update', '/visits/10/close', :method => :patch
 
