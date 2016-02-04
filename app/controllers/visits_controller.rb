@@ -1,6 +1,8 @@
 class VisitsController < ApplicationController
   before_action :filter_local, :only => [:create, :close]
+  after_action :trigger_page
   layout false
+
   def create
     visit = Visit.create! :user => current_user, :url => referer, :open_time => Time.now
     render :text => visit.id
@@ -16,10 +18,21 @@ class VisitsController < ApplicationController
   end
 
   def filter_local
-    render if %w(localhost 127.0.0.1).include? referer.match(/http[s]?:\/\/([\w|\.]+)[:|\/]/)[1]
+    host = referer.match(/http[s]?:\/\/([^\/|\s]+)[:|\/]/)[1]
+    render if %w(localhost 127.0.0.1).include? host
   end
 
   def referer
     params[:referer]
+  end
+
+  def trigger_page
+    begin
+      client = HTTPClient.new
+      client.receive_timeout = 0.0001
+      client.get Settings.http_triggers.page
+    rescue HTTPClient::ReceiveTimeoutError
+# ignored
+    end
   end
 end

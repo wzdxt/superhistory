@@ -13,15 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20160202140522) do
 
-  create_table "pages", force: :cascade do |t|
-    t.string   "url"
-    t.string   "title"
-    t.text     "brief_intro"
-    t.text     "content"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -44,11 +35,11 @@ ActiveRecord::Schema.define(version: 20160202140522) do
   create_table "visits", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "page_id"
-    t.string   "url"
+    t.string   "url",        limit: 1000
     t.datetime "open_time"
     t.datetime "close_time"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   add_index "visits", ["user_id"], name: "index_visits_on_user_id"
