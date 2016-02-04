@@ -16,7 +16,8 @@
 #
 default: &default
   adapter: sqlite3
-  encoding: unicode
+  encoding: utf8mb4
+  collation: utf8mb4_ci
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
