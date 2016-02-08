@@ -1,6 +1,6 @@
 class VisitsController < ApplicationController
   before_action :filter_local, :only => [:create, :close]
-  after_action :trigger_page
+  after_action :trigger_service
   layout false
 
   def create
@@ -30,13 +30,15 @@ class VisitsController < ApplicationController
     params[:referer]
   end
 
-  def trigger_page
-    begin
-      client = HTTPClient.new
-      client.receive_timeout = 0.0001
-      client.get Settings.http_triggers.page
-    rescue HTTPClient::ReceiveTimeoutError
+  def trigger_service
+    %w(page content).each do |serv|
+      begin
+        client = HTTPClient.new
+        client.receive_timeout = 0.0001
+        client.get Settings.http_triggers[serv]
+      rescue HTTPClient::ReceiveTimeoutError
 # ignored
+      end
     end
   end
 end

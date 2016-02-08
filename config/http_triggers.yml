@@ -4,6 +4,7 @@ development:
   <<: *default
   http_triggers:
     page: http://localhost:3000/
+    content: http://localhost:3000/
 
 test:
   <<: *default
@@ -12,4 +13,5 @@ production:
   <<: *default
   http_triggers:
     page: http://x-history-page.vdtapp.com/
+    content: http://x-history-content.vdtapp.com/
 
