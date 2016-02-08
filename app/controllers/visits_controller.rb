@@ -18,8 +18,13 @@ class VisitsController < ApplicationController
   end
 
   def filter_local
-    host = referer.match(/http[s]?:\/\/([^\/|\s]+)[:|\/]/)[1]
-    render if %w(localhost 127.0.0.1).include? host
+    Visit.filter_existed_local
+    render if local_url referer
+  end
+
+  def local_url(url)
+    host = url.match(/http[s]?:\/\/([^\/|\s|:]+)[:|\/]/)[1]
+    %w(localhost 127.0.0.1).include? host
   end
 
   def referer
