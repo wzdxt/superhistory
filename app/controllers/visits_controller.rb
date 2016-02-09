@@ -18,6 +18,7 @@ class VisitsController < ApplicationController
   end
 
   def filter_local
+    # Visit.filter_existed_local
     render if local_url referer
   end
 
