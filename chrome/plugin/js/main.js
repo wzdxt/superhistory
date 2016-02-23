@@ -25,5 +25,5 @@ var func = (function (host) {
     });
 });
 func("http://localhost:3000");
-func("http://x-history.vdtapp.com");
+func("http://visit.x-history.top");
 
