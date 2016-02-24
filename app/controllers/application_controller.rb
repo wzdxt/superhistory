@@ -17,4 +17,11 @@ class ApplicationController < ActionController::Base
     headers['Access-Control-Max-Age'] = '1728000'
   end
 
+  def authenticate_user!
+    if cookies[:dist_session_id]
+      super
+    else
+      redirect_to "http://auth.localhost.com/?target=#{request.url}" if Rails.env.development?
+    end
+  end
 end
