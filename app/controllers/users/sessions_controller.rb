@@ -39,10 +39,11 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   def dist_sign_in_path
-    "#{Settings.hosts.auth.url}/users/sign_in/?target=#{request.url}"
+    "#{Settings.hosts.auth.url}/users/sign_in/?return_to=#{request.url}"
   end
 
   def dist_sign_out_path
-    "#{Settings.hosts.auth.url}/users/sign_out/?target=#{Settings.hosts.web.url}"
+    # "#{Settings.hosts.auth.url}/users/sign_out/?return_to=#{Settings.hosts.web.url}"
+    "#{Settings.hosts.auth.url}/users/sign_out/?return_to=#{root_url}"
   end
 end
