@@ -10,18 +10,17 @@ class ApplicationController < ActionController::Base
   end
 
   def handle_http_options
-    params
     headers['Access-Control-Allow-Origin'] = '*'
     headers['Access-Control-Allow-Methods'] = 'POST, GET, OPTIONS'
     headers['Access-Control-Allow-Headers'] = %w{Origin Accept Content-Type X-Requested-With X-CSRF-Token}.join(',')
     headers['Access-Control-Max-Age'] = '1728000'
   end
 
-  def authenticate_user!
-    if cookies[:dist_session_id]
-      super
-    else
-      redirect_to "http://auth.localhost.com/?target=#{request.url}" if Rails.env.development?
-    end
-  end
+  # def authenticate_user!
+  #   if cookies[:dist_session_id]
+  #     super
+  #   else
+  #     redirect_to "http://auth.localhost.com/users/sign_in/?target=#{request.url}" if Rails.env.development?
+  #   end
+  # end
 end
