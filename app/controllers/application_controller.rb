@@ -16,4 +16,12 @@ class ApplicationController < ActionController::Base
     headers['Access-Control-Max-Age'] = '1728000'
   end
 
+  def authenticate_user!
+    user = super
+    unless cookies[:dist_session_id] and (dist_session = DistSession.find_by(:session_id => cookies[:dist_session_id])) and
+        JSON.parse(dist_session.data, :symbolize_names => true)[:user_id] == user.id
+      sign_out
+      throw :warden, :scope => :user
+    end
+  end
 end
