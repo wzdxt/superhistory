@@ -24,7 +24,7 @@ class VisitsController < ApplicationController
 
   def local_or_ip_url(url)
     host = url.match(/http[s]?:\/\/([^\/|\s|:]+)[:|\/]/)[1]
-    %w(localhost 127.0.0.1).include? host || host =~ /^(\d+\.){3}\d+$/
+    %w(localhost 127.0.0.1).include?(host) || host =~ /^(\d+\.){3}\d+$/
   end
 
   def referer
