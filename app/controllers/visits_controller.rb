@@ -32,7 +32,7 @@ class VisitsController < ApplicationController
   end
 
   def trigger_service
-    %w(page content).each do |serv|
+    %w(page content visithistory).each do |serv|
       begin
         client = HTTPClient.new
         client.receive_timeout = 0.0001
