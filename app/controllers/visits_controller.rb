@@ -1,5 +1,5 @@
 class VisitsController < ApplicationController
-  before_action :filter_local, :only => [:create, :close]
+  before_action :filter_invalid, :only => [:create, :close]
   after_action :trigger_service
   layout false
 
@@ -17,14 +17,22 @@ class VisitsController < ApplicationController
     params.require(:visit).permit!
   end
 
-  def filter_local
+  def filter_invalid
     # Visit.filter_existed_local
-    render if local_or_ip_url referer
+    render if local_or_ip_url(referer) or host_excluded_url(referer)
   end
 
   def local_or_ip_url(url)
     host = url.match(/http[s]?:\/\/([^\/|\s|:]+)[:|\/]/)[1]
     %w(localhost 127.0.0.1).include?(host) || host =~ /^(\d+\.){3}\d+$/
+  end
+
+  def host_excluded_url(url)
+    uri = URI.parse url
+    HostRule.matched_rules(uri.host, uri.port).each do |host_rule|
+      return true if host_rule.excluded?
+    end
+    false
   end
 
   def referer

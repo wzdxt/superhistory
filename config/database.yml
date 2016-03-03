@@ -31,6 +31,9 @@ user:
 dist_session:
   <<: *default
   database: ../superhistory-auth/db/sqlite/superhistory_development
+rule:
+  <<: *default
+  database: ../superhistory-rule/db/sqlite/superhistory_development
 
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
