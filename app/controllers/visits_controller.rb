@@ -23,16 +23,14 @@ class VisitsController < ApplicationController
   end
 
   def local_or_ip_url(url)
-    host = url.match(/http[s]?:\/\/([^\/|\s|:]+)[:|\/]/)[1]
+    host = URI.parse(url).host
     %w(localhost 127.0.0.1).include?(host) || host =~ /^(\d+\.){3}\d+$/
   end
 
   def host_excluded_url(url)
     uri = URI.parse url
-    HostRule.matched_rules(uri.host, uri.port).each do |host_rule|
-      return true if host_rule.excluded?
-    end
-    false
+    rule, included = HostRule.get_rule_by_host_port_path uri.host, uri.port, uri.path
+    return true if included == false    # nil & true is ok
   end
 
   def referer
