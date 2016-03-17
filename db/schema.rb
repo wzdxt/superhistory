@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160202140522) do
+ActiveRecord::Schema.define(version: 20160317014432) do
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -38,8 +38,8 @@ ActiveRecord::Schema.define(version: 20160202140522) do
     t.string   "url",        limit: 1000
     t.datetime "open_time"
     t.datetime "close_time"
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   add_index "visits", ["user_id"], name: "index_visits_on_user_id"

@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   post 'visits' => 'visits#create'
   patch 'visits/:id/close' => 'visits#close'
+  get 'visits/debug' => 'visits#debug'
 
   # root 'welcome#index'
   # get 'welcome#index'

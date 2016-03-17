@@ -25,6 +25,15 @@ default: &default
 development:
   <<: *default
   database: db/sqlite/superhistory_development
+visit0:
+  <<: *default
+  database: db/sqlite/superhistory_development
+visit1:
+  <<: *default
+  database: ../superhistory-auth/db/sqlite/superhistory_development
+visit2:
+  <<: *default
+  database: ../superhistory-admin/db/sqlite/superhistory_development
 user:
   <<: *default
   database: ../superhistory-auth/db/sqlite/superhistory_development

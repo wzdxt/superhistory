@@ -3,6 +3,18 @@ class VisitsController < ApplicationController
   after_action :trigger_service
   layout false
 
+  def debug
+    # Visit.for_user 1
+    # Visit.split_tables
+    # Visit.all
+    # Visit.where(:user_id => 1)
+    # res = Visit.all.for_user(1).each {|a|p a}
+    # Visit::Visit2.all
+    # User.find 1,2
+    res = Visit.all.find_by :id => 12
+    render :text => res
+  end
+
   def create
     visit = Visit.create! :user => current_user, :url => referer, :open_time => Time.now
     render :text => visit.id
